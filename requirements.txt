@@ -1,5 +1,7 @@
 djangorestframework-simplejwt
-rest_framework
+djangorestframework
+markdown
+django-filter
 crispy_forms
 django
 django-heroku
