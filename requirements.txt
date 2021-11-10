@@ -2,6 +2,6 @@ djangorestframework-simplejwt
 djangorestframework
 markdown
 django-filter
-crispy_forms
+django-crispy-forms
 django
 django-heroku
