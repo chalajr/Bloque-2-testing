@@ -1,0 +1,126 @@
+{% extends 'LearningCatalog/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<head>
+    <title>Categorías</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'LearningCatalog/css/master.css' %}">
+</head>
+
+<div class="container">
+    <div class="jumbotron mt-5 bg-light mr-0 ml-0 shadow mb-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="display-4 mb-3">
+                    {{lesson.titulo}}
+                    <span class="material-icons-outlined align-middle blueIcons" style="font-size: 48px;">
+                        menu_book
+                    </span>
+                </h1>
+            </div>
+            <div class="col-md-6 text-md-right my-auto">
+                <div id="contenedor">
+                    {% if request.user.is_anonymous %}
+                    <a class="btn btn-primary" href="{% url 'login' %}">
+                        Seguir
+                        <span class="material-icons-outlined align-middle">
+                            bookmark
+                        </span>
+                    </a>
+                    {% else %}
+
+                    {% if follow %}
+                    <button class="btn btn-danger" onclick="followLesson({{lesson.pk}})">
+                        Dejar de seguir
+                        <span class="material-icons-outlined align-middle">
+                            bookmark
+                        </span>
+                    </button>
+                    {% else %}
+                    <button class="btn btn-primary" onclick="followLesson({{lesson.pk}})">
+                        Seguir
+                        <span class="material-icons-outlined align-middle">
+                            bookmark
+                        </span>
+                    </button>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- imagen -->
+                <img src="{{lesson.imagen.url}}" alt="" style="max-width:100%">
+            </div>
+            <div class="col-md-6">
+                <!-- Descripcion -->
+                <p>{{lesson.descripcion}}</p>
+            </div>
+        </div>
+        <hr>
+        <h1 class="display-4 mb-3">Contenido</h1>
+
+        <div class="row">
+            {% for archivo in files %}
+            <div class="col-md-6 mt-5">
+                <!-- imagen -->
+                <a href="{{archivo.path.url}}" class="btn customBtn rounded shadow-lg w-100 h-100 files linkVisited">
+                    <h4>
+                        {{archivo.titulo}}
+                        <h4 class="blueFiles">
+                            ({{ archivo.orden }})
+                        </h4>
+                    </h4>
+                    <span class="material-icons-outlined blueFiles" style="font-size: 48px;">
+                        {% if archivo.lipo == 'PDF' %}
+                        picture_as_pdf
+                        {% elif archivo.lipo == 'IMG'%}
+                        image
+                        {% elif archivo.lipo == 'DOC'%}
+                        description
+                        {% elif archivo.lipo == 'XLX'%}
+                        table_view
+                        {% elif archivo.lipo == 'PPX'%}
+                        co_present
+                        {% elif archivo.lipo == 'ANY'%}
+                        folder
+                        {% endif %}
+                    </span>
+                    <small class="form-text text-muted font-weight-bold">
+                        {{archivo.descripcion}}
+                    </small>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <h1 class="display-4 mb-3">Videos</h1>
+        <div class="row">
+
+           
+        {% for vidList in vidLists %}
+            
+            
+            
+            <div class="col-12">
+                <h4>{{ vidList.0 }}</h4>
+            </div>
+            <div class="col-lg-6">
+                <iframe src="https://www.youtube.com/embed/{{ vidList.2 }}" width="100%" height="100%" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="col-lg-6">
+                {{ vidList.1 }}
+            </div>
+            
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+<!--users/templates/main/login.html-->
+{% extends 'LearningCatalog/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<head>
+    <title>
+        Registro
+    </title>
+</head>
+<!-- Seccion desarrollada por julio  -->
+<div class="container mt-5 pb-2 rounded ">
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-lg-5">
+            <div class="card bg-white shadow">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="text-center">
+                            <img src="{% static 'accounts/img/logoEducap.png' %}" alt="Logo Educap" width="200">
+                            <h2>Iniciar sesión</h2>
+                            <small class="form-text text-muted">Utiliza tu cuenta de Educap</small>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class="">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{ form.username|as_crispy_field }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.password|as_crispy_field }}
+                                </div>
+                                {% if form.errors %}
+                                <p style="color:#ba181b"><strong>El usuario o la contraseña son incorrectos. <br> Por
+                                        favor intenta de nuevo.</strong></p>
+                                {% endif %}
+                                <div class="text-center">
+                                    <input class="btn btn-primary" type="submit" value="Iniciar sesión">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-3 text-left justify-content-center">
+                        <div class="">
+                            <a href="{% url 'myAccount:studentCreate' %}" class="my-auto align-middle">
+                                No tienes cuenta? Registrate.
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row mb-3 text-left justify-content-center">
+                        <div class="">
+                            <a href="{% url 'password_reset' %}" class="my-auto align-middle">
+                                Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

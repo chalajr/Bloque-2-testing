@@ -1,0 +1,24 @@
+{% extends 'LearningCatalog/layout.html' %}
+{% load static %}
+{% block body %}
+<div class="container" id="multifuncioanes">
+    <div class="jumbotron mt-5 bg-light mr-0 ml-0 shadow mb-1">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="display-4 text-break">
+                    Cuenta actualizada exitosamente!
+                    <span class="material-icons-outlined redIcons align-bottom mr-1 " style="font-size: 48px;">
+                        task_alt
+                    </span>
+                </h2>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary" href="{% url 'myAccount:myAccount' %}">Volver a mi cuenta</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'LearningCatalog/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<head>
+  <title>Registro de estudiantes</title>
+</head>
+
+<div class="container">
+  <div class="jumbotron mt-5 bg-light mr-0 ml-0 shadow mb-5">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-4 mb-3">
+          Registro de estudiantes
+          <span class="material-icons-outlined align-bottom redIcons " style="font-size: 48px;">
+            person_add
+          </span>
+        </h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <form action="{% url 'myAccount:studentCreate' %}" method="POST">
+          {% csrf_token %}
+      
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                {{userForm.email|as_crispy_field}}
+              </div>
+              <div class="form-group col-md-2">
+                {{studentForm.edad|as_crispy_field}}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                {{userForm.first_name|as_crispy_field}}
+              </div>
+              <div class="form-group col-md-6">
+                {{userForm.last_name|as_crispy_field}}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                {{userForm.password1|as_crispy_field}}
+              </div>
+              <div class="form-group col-md-6">
+                {{userForm.password2|as_crispy_field}}
+              </div>
+            </div>
+            {{userForm.errors}}
+            {{studentForm.errors}}
+            
+          <button type="submit" class="btn btn-primary float-right mr-3">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'cuentas/slides.js' %}"></script>
+{% endblock %}
