@@ -6,3 +6,4 @@ django-crispy-forms
 django
 django-heroku
 gunicorn
+Pillow
